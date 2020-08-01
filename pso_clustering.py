@@ -1,3 +1,5 @@
+from typing import Tuple
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -5,7 +7,17 @@ from particle import Particle
 
 
 class PSOClusteringSwarm:
-    def __init__(self, n_clusters, n_particles, data, hybrid=True, w=0.72, c1=1.49, c2=1.49):
+    def __init__(self, n_clusters: int, n_particles: int, data: np.ndarray, hybrid=True, w=0.72, c1=1.49, c2=1.49):
+        """
+        Initializes the swarm.
+        :param n_clusters: number of clusters
+        :param n_particles: number of particles
+        :param data: ( number_of_points x dimensions)
+        :param hybrid: bool : whether or not use kmeans as seeding
+        :param w:
+        :param c1:
+        :param c2:
+        """
         self.n_clusters = n_clusters
         self.n_particles = n_particles
         self.data = data
@@ -40,12 +52,12 @@ class PSOClusteringSwarm:
             self.gb_pos = particle.pb_pos.copy()
             self.gb_clustering = particle.pb_clustering.copy()
 
-    def start(self, iteration=1000, plot=True):
+    def start(self, iteration=1000, plot=False) -> Tuple[np.ndarray, float]:
         """
 
         :param plot: = True will plot the global best data clusters
         :param iteration: number of max iteration
-        :return:
+        :return: (best cluster, best fitness value)
         """
         self._print_initial(iteration, plot)
         progress = []
@@ -71,7 +83,7 @@ class PSOClusteringSwarm:
 
             for particle in self.particles:
                 particle.move_centroids(gb_pos=self.gb_pos)
-            progress.append((self.gb_pos, self.gb_val))
+            progress.append([self.gb_pos, self.gb_clustering, self.gb_val])
+
         print('Finished!')
-        # print('final result =', self.gb_val, self.gb_pos)
-        # print('\n', progress)
+        return self.gb_clustering, self.gb_val

@@ -11,7 +11,7 @@ if plot:
     data_points = data_points[[0, 1]]
 # convert to numpy 2d array
 data_points = data_points.values
-pso = PSOClusteringSwarm(n_clusters=3, n_particles=10, data=data_points, hybrid=False)
+pso = PSOClusteringSwarm(n_clusters=3, n_particles=10, data=data_points, hybrid=True)
 pso.start(iteration=1000, plot=plot)
 
 # For showing the actual clusters
