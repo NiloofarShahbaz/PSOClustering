@@ -23,4 +23,4 @@ will need *pso_clustering.py* and *particle.py*.
 
 `clusters, global_best_fitness = pso.start(iteration=1000)`
 
-The function *start()* will return a tuple of the final clusters (for each data point has the cluster id) and the final value of the global best fitness of the swarm. 
+The function `start()` will return a tuple of the final clusters (for each data point has the cluster id) and the final value of the global best fitness of the swarm. 
